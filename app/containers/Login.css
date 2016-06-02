@@ -1,0 +1,19 @@
+.login {
+  margin: 0 auto;
+}
+
+.login .logo-img {
+  width: 100%;
+  height: 100%;
+}
+
+.login .loading {
+  position: absolute;
+  background-image: url('../images/ring-alt.gif');
+  background-repeat: no-repeat;
+  background-position: center center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
