@@ -16,11 +16,20 @@ class ContactList extends Component {
       <List>
         {
           contacts ?
-          contacts.map((contact) => <Contact
-            key={contact.id}
-            contact={contact}
-            onContactClick={handleContactClick}
-          />) : (
+          contacts
+            .sort((a, b) => {
+              if (a.name < b.name) {
+                return -1;
+              } else if (a.name > b.name) {
+                return 1;
+              }
+              return 0;
+            })
+            .map((contact) => <Contact
+              key={contact.id}
+              contact={contact}
+              onContactClick={handleContactClick}
+            />) : (
             <ListItem>
               You still have no friends now.
             </ListItem>
