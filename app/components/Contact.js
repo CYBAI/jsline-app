@@ -11,11 +11,13 @@ class Contact extends Component {
     } = this.props;
 
     return (
-      <ListItem leftAvatar={
-        <Avatar
-          src={contact.iconPath}
-        />}
-      > { contact.name } </ListItem>
+      <ListItem
+        leftAvatar={
+          <Avatar
+            src={contact.iconPath}
+          />
+        }
+      > {contact.name} </ListItem>
     );
   }
 }
