@@ -17,7 +17,9 @@ class Contact extends Component {
             src={contact.iconPath}
           />
         }
-      > {contact.name} </ListItem>
+        primaryText={contact.name}
+        secondaryText={contact.statusMessage}
+      />
     );
   }
 }
