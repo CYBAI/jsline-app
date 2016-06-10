@@ -73,9 +73,9 @@ class Login extends Component {
         </Row>
         {
           this.props.isFetching ?
-          <Loading
-            percentage={100}
-          /> : null
+            <Loading
+              percentage={100}
+            /> : null
         }
       </Grid>
     );
