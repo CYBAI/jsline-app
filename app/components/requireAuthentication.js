@@ -42,7 +42,7 @@ export default function requireAuthentication(Component) {
         <div>
           {
             this.props.isAuthenticated ?
-            <Component {...this.props} /> : null
+              <Component {...this.props} /> : null
           }
         </div>
       );
