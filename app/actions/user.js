@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+
 import { LineClient } from 'jsline-api';
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
@@ -44,31 +46,34 @@ export function loginUser(options) {
       password: options.password,
       authToken: options.authToken,
       certificate: options.certificate
-    }).login().then((result) => {
-      const [revision, profile, contacts, groups, rooms] = result;
+    })
+      .login()
+      .then((result) => {
+        const [revision, profile, contacts, groups, rooms] = result;
 
-      if (
-        (options.authToken && options.certificate) &&
-        (profile._client.authToken !== options.authToken ||
-        profile._client.certificate !== options.certificate)
-      ) {
-        return dispatch(loginError('Login error: Please check your email and password'));
-      }
+        if (
+          (options.authToken && options.certificate) &&
+          (profile._client.authToken !== options.authToken ||
+          profile._client.certificate !== options.certificate)
+        ) {
+          return dispatch(loginError('Login error: Please check your email and password'));
+        }
 
-      localStorage.setItem('authToken', profile._client.authToken);
-      localStorage.setItem('certificate', profile._client.certificate);
-      dispatch(
-        loginSuccess({
-          authToken: profile._client.authToken,
-          certificate: profile._client.certificate,
-          revision, profile, contacts, groups, rooms
-        })
-      );
-      return [revision, profile, contacts, groups, rooms];
-    }).catch((err) => {
-      console.log('Error: ', err); // eslint-disable-line no-console
-      dispatch(loginError(err.reason));
-      return Promise.reject(err);
-    });
+        localStorage.setItem('authToken', profile._client.authToken);
+        localStorage.setItem('certificate', profile._client.certificate);
+        dispatch(
+          loginSuccess({
+            authToken: profile._client.authToken,
+            certificate: profile._client.certificate,
+            revision, profile, contacts, groups, rooms
+          })
+        );
+        return [revision, profile, contacts, groups, rooms];
+      })
+      .catch((err) => {
+        console.log('Error: ', err); // eslint-disable-line no-console
+        dispatch(loginError(err.reason));
+        return Promise.reject(err);
+      });
   };
 }
