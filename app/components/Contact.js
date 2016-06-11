@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 import ListItem from 'material-ui/List/ListItem';
 import Avatar from 'material-ui/Avatar';
@@ -19,6 +20,7 @@ class Contact extends Component {
         }
         primaryText={contact.name}
         secondaryText={contact.statusMessage}
+        containerElement={<Link to={`/chat/${contact.id}`} />}
       />
     );
   }
