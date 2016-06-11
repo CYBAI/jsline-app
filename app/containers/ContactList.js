@@ -1,21 +1,18 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import List from 'material-ui/List/List';
-import ListItem from 'material-ui/List/ListItem';
+import { List } from 'material-ui/List';
 import Contact from '../components/Contact';
 
 class ContactList extends Component {
   render() {
     const {
-      contacts,
-      handleContactClick
+      contacts
     } = this.props;
 
     return (
       <List>
         {
-          contacts ?
           contacts
             .sort((a, b) => {
               if (a.name < b.name) {
@@ -28,12 +25,7 @@ class ContactList extends Component {
             .map((contact) => <Contact
               key={contact.id}
               contact={contact}
-              onContactClick={handleContactClick}
-            />) : (
-            <ListItem>
-              You still have no friends now.
-            </ListItem>
-          )
+            />)
         }
       </List>
     );
@@ -41,8 +33,7 @@ class ContactList extends Component {
 }
 
 ContactList.propTypes = {
-  contacts: PropTypes.array,
-  handleContactClick: PropTypes.func
+  contacts: PropTypes.array
 };
 
 function mapStateToProps(state) {

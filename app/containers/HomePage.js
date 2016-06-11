@@ -2,14 +2,26 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
-import AppBar from 'material-ui/AppBar';
-import Loading from '../components/Loading';
-import ContactList from './ContactList';
+import AppNavDrawer from '../components/AppNavDrawer';
+import { navDrawerToggle, dockedToggle } from '../actions/navDrawer';
 
 class HomePage extends Component {
+  constructor() {
+    super();
+    this.handleChangeRequestNavDrawer = this.handleChangeRequestNavDrawer.bind(this);
+  }
+
+  handleChangeRequestNavDrawer() {
+    const {
+      navDrawerOpen
+    } = this.props;
+
+    this.props.navDrawerToggle(navDrawerOpen);
+  }
+
   render() {
     const {
-      user
+      user,
     } = this.props;
 
     const {
@@ -18,11 +30,11 @@ class HomePage extends Component {
 
     return (
       <div>
-        <Loading />
-        <AppBar
-          title="LINE"
+        <AppNavDrawer
+          contacts={contacts}
+          onRequestChangeNavDrawer={this.handleChangeRequestNavDrawer}
         />
-        <ContactList contacts={contacts} />
+        {this.props.children}
         <Link to="/login">to Login</Link>
       </div>
     );
@@ -30,18 +42,33 @@ class HomePage extends Component {
 }
 
 HomePage.propTypes = {
-  user: PropTypes.object.isRequired
+  children: PropTypes.node,
+  user: PropTypes.object.isRequired,
+  docked: PropTypes.bool,
+  navDrawerOpen: PropTypes.bool,
+  dockedToggle: PropTypes.func.isRequired,
+  navDrawerToggle: PropTypes.func.isRequired
 };
 
 HomePage.contextTypes = {
-  router: React.PropTypes.object.isRequired
+  router: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
-  const { user } = state;
+  const {
+    user,
+    docked,
+    navDrawerOpen
+  } = state;
+
   return {
-    user
+    user,
+    docked,
+    navDrawerOpen
   };
 }
 
-export default connect(mapStateToProps)(HomePage);
+export default connect(mapStateToProps, {
+  dockedToggle,
+  navDrawerToggle
+})(HomePage);

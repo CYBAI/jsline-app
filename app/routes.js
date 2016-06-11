@@ -1,15 +1,17 @@
 import React from 'react';
-import { Route, IndexRoute } from 'react-router';
-import App from './containers/App';
+import { Route } from 'react-router';
 import Login from './containers/Login';
+import App from './containers/App';
 import HomePage from './containers/HomePage';
 import NotFound from './containers/NotFound';
+import ChatView from './components/ChatView';
 import requireAuthentication from './components/requireAuthentication';
 
 export default (
-  <Route path="/" component={App}>
-    <IndexRoute component={requireAuthentication(HomePage)} />
-    <Route path="/home" component={requireAuthentication(HomePage)} />
+  <Route component={App}>
+    <Route path="/" component={requireAuthentication(HomePage)}>
+      <Route path="/chat/:userId" component={ChatView} />
+    </Route>
     <Route path="/login" component={Login} />
     <Route path="*" component={NotFound} />
   </Route>
