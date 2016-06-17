@@ -3,8 +3,20 @@ import { connect } from 'react-redux';
 
 import { List } from 'material-ui/List';
 import Contact from '../components/Contact';
+import { changeContact } from '../actions/user';
 
 class ContactList extends Component {
+  constructor() {
+    super();
+    this.handleChangeContact = this.handleChangeContact.bind(this);
+  }
+
+  handleChangeContact(contact) {
+    return (event) => {
+      this.props.changeContact(contact);
+    };
+  }
+
   render() {
     const {
       contacts
@@ -25,6 +37,7 @@ class ContactList extends Component {
             .map((contact) => <Contact
               key={contact.id}
               contact={contact}
+              handleTouchTap={this.handleChangeContact}
             />)
         }
       </List>
@@ -33,11 +46,15 @@ class ContactList extends Component {
 }
 
 ContactList.propTypes = {
-  contacts: PropTypes.array
+  user: PropTypes.object,
+  contacts: PropTypes.array,
+  changeContact: PropTypes.func
 };
 
 function mapStateToProps(state) {
   return state;
 }
 
-export default connect(mapStateToProps)(ContactList);
+export default connect(mapStateToProps, {
+  changeContact
+})(ContactList);

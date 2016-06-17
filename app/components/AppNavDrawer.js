@@ -24,11 +24,6 @@ class AppNavDrawer extends Component {
   constructor() {
     super();
     this.handleTouchTapHeader = this.handleTouchTapHeader.bind(this);
-    this.handleRequestChangeLink = this.handleRequestChangeLink.bind(this);
-  }
-
-  handleRequestChangeLink(event, value) {
-    window.location = value;
   }
 
   handleTouchTapHeader() {
@@ -72,7 +67,6 @@ class AppNavDrawer extends Component {
 AppNavDrawer.propTypes = {
   user: PropTypes.object.isRequired,
   contacts: PropTypes.array,
-  onRequestChangeNavDrawer: PropTypes.func,
   docked: PropTypes.bool,
   navDrawerOpen: PropTypes.bool,
   style: PropTypes.object

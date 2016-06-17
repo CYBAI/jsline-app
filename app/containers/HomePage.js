@@ -6,19 +6,6 @@ import AppNavDrawer from '../components/AppNavDrawer';
 import { navDrawerToggle, dockedToggle } from '../actions/navDrawer';
 
 class HomePage extends Component {
-  constructor() {
-    super();
-    this.handleChangeRequestNavDrawer = this.handleChangeRequestNavDrawer.bind(this);
-  }
-
-  handleChangeRequestNavDrawer() {
-    const {
-      navDrawerOpen
-    } = this.props;
-
-    this.props.navDrawerToggle(navDrawerOpen);
-  }
-
   render() {
     const {
       user,
@@ -32,7 +19,6 @@ class HomePage extends Component {
       <div>
         <AppNavDrawer
           contacts={contacts}
-          onRequestChangeNavDrawer={this.handleChangeRequestNavDrawer}
         />
         {this.props.children}
         <Link to="/login">to Login</Link>

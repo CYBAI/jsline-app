@@ -2,13 +2,14 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
-import ListItem from 'material-ui/List/ListItem';
 import Avatar from 'material-ui/Avatar';
+import ListItem from 'material-ui/List/ListItem';
 
 class Contact extends Component {
   render() {
     const {
-      contact
+      contact,
+      handleTouchTap
     } = this.props;
 
     return (
@@ -21,17 +22,15 @@ class Contact extends Component {
         primaryText={contact.name}
         secondaryText={contact.statusMessage}
         containerElement={<Link to={`/chat/${contact.id}`} />}
+        onTouchTap={handleTouchTap(contact)}
       />
     );
   }
 }
 
 Contact.propTypes = {
-  contact: PropTypes.object.isRequired
+  contact: PropTypes.object.isRequired,
+  handleTouchTap: PropTypes.func.isRequired
 };
 
-function mapStateToProps(state) {
-  return state;
-}
-
-export default connect(mapStateToProps)(Contact);
+export default connect()(Contact);

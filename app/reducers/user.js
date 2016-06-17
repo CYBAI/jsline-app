@@ -1,5 +1,6 @@
 import {
-  LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE
+  LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE,
+  CHANGE_CONTACTID
 } from '../actions/user';
 
 export default function user(state = {
@@ -7,7 +8,8 @@ export default function user(state = {
   isAuthenticated: !!(
     localStorage.getItem('authToken') &&
     localStorage.getItem('certificate')
-  )
+  ),
+  selectedContactId: ''
 }, action) {
   switch (action.type) {
     case LOGIN_REQUEST:
@@ -31,6 +33,12 @@ export default function user(state = {
         isFetching: false,
         isAuthenticated: false,
         errorMessage: action.message
+      };
+    case CHANGE_CONTACTID:
+      return {
+        ...state,
+        selectedContact: action.contact,
+        selectedContactId: action.contact.id
       };
     default:
       return state;

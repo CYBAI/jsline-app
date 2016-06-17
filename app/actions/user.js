@@ -6,6 +6,8 @@ export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 
+export const CHANGE_CONTACTID = 'CHANGE_CONTACTID';
+
 function loginRequest(options) {
   return {
     type: LOGIN_REQUEST,
@@ -31,6 +33,17 @@ function loginError(message) {
     isAuthenticated: false,
     message
   };
+}
+
+function changeContactId(contact) {
+  return {
+    type: CHANGE_CONTACTID,
+    contact
+  };
+}
+
+export function changeContact(contact) {
+  return (dispatch) => dispatch(changeContactId(contact));
 }
 
 export function loginUser(options) {

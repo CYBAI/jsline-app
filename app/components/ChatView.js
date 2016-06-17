@@ -4,24 +4,27 @@ import { connect } from 'react-redux';
 class ChatView extends Component {
   render() {
     const {
-      userId
+      selectedContactId
     } = this.props;
 
     return (
-      <div>{userId || 'Welcome to LINE'}</div>
+      <div>{
+        selectedContactId || 'Welcome to LINE'
+      }</div>
     );
   }
 }
 
 ChatView.propTypes = {
-  userId: PropTypes.any
+  selectedContactId: PropTypes.string
 };
 
-function mapStateToProps(state, ownProps) {
-  return {
+function mapStateToProps(state) {
+  const { user } = state;
+  return user ? {
     ...state,
-    userId: ownProps.params.userId
-  };
+    selectedContactId: user.selectedContactId
+  } : state;
 }
 
 export default connect(mapStateToProps)(ChatView);
